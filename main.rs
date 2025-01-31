@@ -11,9 +11,9 @@ enum Algorithm {
 impl SortStrategy {
     fn sort(alg: Algorithm, cont: &mut [i32]) {
         match alg {
-            QuickSort => SortStrategy::quick_sort(&mut cont),
-            InsertionSort => SortStrategy::insertion_sort(&mut cont),
-            BubbleSort => SortStrategy::bubble_sort(&mut cont),
+            Algorithm::QuickSort => Self::quick_sort(cont),
+            Algorithm::InsertionSort => Self::insertion_sort(cont),
+            Algorithm::BubbleSort => Self::bubble_sort(cont),
         }
     }
 
@@ -47,9 +47,9 @@ impl SortStrategy {
         if cont.len() <= 1 {
             return;
         }
-        let pivot = partition(cont);
-        quick_sort(&mut cont[0..pivot]);
-        quick_sort(&mut cont[pivot + 1 ..]);
+        let pivot = Self::partition(cont);
+        Self::quick_sort(&mut cont[0..pivot]);
+        Self::quick_sort(&mut cont[pivot + 1 ..]);
     }
 
     fn partition(cont: &mut [i32]) -> usize {
@@ -64,12 +64,15 @@ impl SortStrategy {
                 i += 1;
             }
         }
-        let temp = arr[len - 1];
-        arr[len - 1] = arr[i];
-        arr[i] = temp;
+        let temp = cont[len - 1];
+        cont[len - 1] = cont[i];
+        cont[i] = temp;
         i
     }
 }
 
 fn main() {
+    let mut data = vec![5, 4, 3, 2, 1];
+    SortStrategy::sort(Algorithm::QuickSort, &mut data);
+    println!("{:?}", data);
 }

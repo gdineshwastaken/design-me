@@ -1,0 +1,10 @@
+[package]
+name = "design_pattern"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "design_pattern"
+path = "main.rs"
